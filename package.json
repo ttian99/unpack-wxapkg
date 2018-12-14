@@ -16,7 +16,7 @@
   "license": "ISC",
   "bin": {
     "uw": "bin/cmd",
-    "unpack-wxapkg": "bin/cmd"
+    "unpack-wxapkg": "./bin/cmd"
   },
   "dependencies": {
     "commander": "^2.19.0",
