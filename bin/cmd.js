@@ -1,0 +1,38 @@
+// 引入依赖
+var program = require('commander');
+var pkg = require('../package.json');
+var unpack = require('../index.js');
+
+
+// 必须在.parse()之前，因为node的emit()是即时的
+program.on('--help', function () {
+    console.log('');
+    console.log('Examples:');
+    console.log('  uw yours.wxapkg unpackDir');
+    console.log('');
+});
+
+
+// 定义版本和参数选项
+program
+    .version(pkg.version, '-v, --version')
+    .description('uw <wxapkgFile> <unpackWxapkgPath>')
+    .description('unpack-wxapkg <wxapkgFile> <unpackWxapkgPath>')
+    .option('-s, --src [src]', 'source dir')
+    .option('-d, --dest [dest]', 'destination dir')
+    .parse(process.argv);
+
+
+let src = null; 
+let dest = null;
+if (program.src || program.dest) {// 有指定输入目录或者输出目录
+    src = program.src;
+    dest = program.dest;
+} else { // 无指定
+    src = process.argv[2];
+    dest = process.argv[3];
+}
+
+console.log('src = ' + src + ' , dest = ' + dest);
+// 开始解压
+unpack(src, dest);
