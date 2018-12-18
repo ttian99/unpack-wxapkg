@@ -13,7 +13,7 @@ async function unpackWxapkg(source, destination) {
     let pArr = [];
     for (let i = 0; i < files.length; i++) {
         const f = files[i];
-        let filePath = path.join(__dirname, './', destination, basename, f.name);
+        let filePath = path.join(process.cwd(), './', destination, basename, f.name);
         let dir = path.dirname(filePath);
         mkdirp(dir, function (err) {
             if (err) return cb(err);
